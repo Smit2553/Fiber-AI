@@ -159,11 +159,14 @@ const styles = StyleSheet.create({
   scope: {
     width: 300,
     height: 200,
-    borderWidth: 1,
     borderColor: "white",
     borderRadius: 20,
+    borderStyle: "dashed",
+    borderWidth: 3,
   },
   itemContainer: {
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
     position: "absolute",
     bottom: 0,
     width: "100%",

@@ -22,22 +22,6 @@ export default function TabLayout() {
       }}
     >
       <Tabs.Screen
-        name="scan"
-        options={{
-          title: "Scan",
-          tabBarIcon: ({ color, focused }) => (
-            <Ionicons
-              name="scan"
-              size={26}
-              color={colorScheme === "dark" ? "white" : "black"}
-            />
-          ),
-          tabBarLabelStyle: {
-            color: colorScheme === "dark" ? "#ffff" : "gray", // Change title color here
-          },
-        }}
-      />
-      <Tabs.Screen
         name="index"
         options={{
           title: "Home",
@@ -45,7 +29,9 @@ export default function TabLayout() {
             <Feather
               name="home"
               size={24}
-              color={colorScheme === "dark" ? "white" : "black"}
+              color={
+                focused ? "#FF7F3E" : colorScheme === "dark" ? "white" : "black"
+              }
             />
           ),
           tabBarLabelStyle: {
@@ -61,7 +47,27 @@ export default function TabLayout() {
             <Feather
               name="star"
               size={24}
-              color={colorScheme === "dark" ? "white" : "black"}
+              color={
+                focused ? "#FF7F3E" : colorScheme === "dark" ? "white" : "black"
+              }
+            />
+          ),
+          tabBarLabelStyle: {
+            color: colorScheme === "dark" ? "#ffff" : "gray", // Change title color here
+          },
+        }}
+      />
+      <Tabs.Screen
+        name="scan"
+        options={{
+          title: "Scan",
+          tabBarIcon: ({ color, focused }) => (
+            <Ionicons
+              name="scan"
+              size={26}
+              color={
+                focused ? "#FF7F3E" : colorScheme === "dark" ? "white" : "black"
+              }
             />
           ),
           tabBarLabelStyle: {
@@ -77,7 +83,9 @@ export default function TabLayout() {
             <MaterialIcons
               name="history"
               size={30}
-              color={colorScheme === "dark" ? "white" : "black"}
+              color={
+                focused ? "#FF7F3E" : colorScheme === "dark" ? "white" : "black"
+              }
             />
           ),
           tabBarLabelStyle: {
@@ -94,7 +102,9 @@ export default function TabLayout() {
             <AntDesign
               name="search1"
               size={30}
-              color={colorScheme === "dark" ? "white" : "black"}
+              color={
+                focused ? "#FF7F3E" : colorScheme === "dark" ? "white" : "black"
+              }
             />
           ),
           tabBarLabelStyle: {
