@@ -1,10 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Text, View, StyleSheet, Button } from "react-native";
 import { CameraView, Camera } from "expo-camera";
+import ItemComponent from "@/components/ItemInformation";
+import axios from "axios";
 
 export default function App() {
   const [hasPermission, setHasPermission] = useState(false);
   const [scanned, setScanned] = useState(false);
+  const [itemData, setItemData] = useState<{
+    imageSource: string;
+    title: string;
+    rating: string;
+  } | null>(null);
 
   useEffect(() => {
     const getCameraPermissions = async () => {
@@ -17,7 +24,25 @@ export default function App() {
 
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
-    alert(`Bar code with type ${type} and data ${data} has been scanned!`);
+    axios
+      // Update the URL to match the IP address of your backend server
+      .get(`http://10.56.21.241:5050/search/${data}`)
+
+      .then((response) => {
+        setItemData({
+          imageSource: response.data.image_url,
+          title: response.data.product_name,
+          rating: response.data.code,
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+        setItemData({
+          imageSource: "https://via.placeholder.com/50",
+          title: data,
+          rating: "0/100",
+        });
+      });
   };
 
   if (hasPermission === null) {
@@ -47,8 +72,18 @@ export default function App() {
         }}
         style={StyleSheet.absoluteFillObject}
       />
-      {scanned && (
-        <Button title={"Tap to Scan Again"} onPress={() => setScanned(false)} />
+      {scanned && itemData && (
+        <View style={styles.itemContainer}>
+          <ItemComponent
+            imageSource={itemData.imageSource}
+            title={itemData.title}
+            rating={itemData.rating}
+          />
+          <Button
+            title={"Tap to Scan Again"}
+            onPress={() => setScanned(false)}
+          />
+        </View>
       )}
     </View>
   );
@@ -59,5 +94,12 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     justifyContent: "center",
+  },
+  itemContainer: {
+    position: "absolute",
+    bottom: 0,
+    width: "100%",
+    padding: 10,
+    backgroundColor: "#fff",
   },
 });
