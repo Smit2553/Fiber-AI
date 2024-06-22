@@ -19,7 +19,7 @@ export default function TabLayout() {
         headerShown: false,
       }}
     >
-<Tabs.Screen
+      <Tabs.Screen
         name="index"
         options={{
           title: "Home",
@@ -57,8 +57,12 @@ export default function TabLayout() {
               name={focused ? "scan" : "scan-outline"}
               color={color}
             />
-       <Tabs.Screen
-        name="Search"
+          ),
+        }}
+      />
+
+      <Tabs.Screen
+        name="search"
         options={{
           title: "Search",
           tabBarIcon: ({ color, focused }) => (
