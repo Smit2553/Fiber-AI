@@ -66,9 +66,11 @@ const styles = StyleSheet.create({
     fontFamily: 'Optima',
     marginBottom: 5,
   },
+
   categContainer: {
     marginLeft: 10,
     marginTop: 40,
+
   },
   catContainer: {
     padding: 10,
