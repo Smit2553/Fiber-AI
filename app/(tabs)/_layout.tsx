@@ -4,7 +4,6 @@ import React from "react";
 import { TabBarIcon } from "@/components/navigation/TabBarIcon";
 import { Colors } from "@/constants/Colors";
 import { useColorScheme } from "@/hooks/useColorScheme";
-
 import { FontAwesome5 } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -20,7 +19,7 @@ export default function TabLayout() {
         headerShown: false,
       }}
     >
-      <Tabs.Screen
+<Tabs.Screen
         name="index"
         options={{
           title: "Home",
@@ -50,7 +49,16 @@ export default function TabLayout() {
       />
 
       <Tabs.Screen
-        name="search"
+        name="scan"
+        options={{
+          title: "Scan",
+          tabBarIcon: ({ color, focused }) => (
+            <TabBarIcon
+              name={focused ? "scan" : "scan-outline"}
+              color={color}
+            />
+       <Tabs.Screen
+        name="Search"
         options={{
           title: "Search",
           tabBarIcon: ({ color, focused }) => (
