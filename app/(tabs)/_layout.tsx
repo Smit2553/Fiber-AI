@@ -8,6 +8,7 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -16,16 +17,40 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
+        tabBarInactiveTintColor: colorScheme === "dark" ? "#ffff" : "gray",
         headerShown: false,
       }}
     >
+      <Tabs.Screen
+        name="scan"
+        options={{
+          title: "Scan",
+          tabBarIcon: ({ color, focused }) => (
+            <Ionicons
+              name="scan"
+              size={26}
+              color={colorScheme === "dark" ? "white" : "black"}
+            />
+          ),
+          tabBarLabelStyle: {
+            color: colorScheme === "dark" ? "#ffff" : "gray", // Change title color here
+          },
+        }}
+      />
       <Tabs.Screen
         name="index"
         options={{
           title: "Home",
           tabBarIcon: ({ color, focused }) => (
-            <Feather name="home" size={24} color="black" />
+            <Feather
+              name="home"
+              size={24}
+              color={colorScheme === "dark" ? "white" : "black"}
+            />
           ),
+          tabBarLabelStyle: {
+            color: colorScheme === "dark" ? "#ffff" : "gray", // Change title color here
+          },
         }}
       />
       <Tabs.Screen
@@ -33,31 +58,31 @@ export default function TabLayout() {
         options={{
           title: "Star",
           tabBarIcon: ({ color, focused }) => (
-            <Feather name="star" size={24} color="black" />
+            <Feather
+              name="star"
+              size={24}
+              color={colorScheme === "dark" ? "white" : "black"}
+            />
           ),
+          tabBarLabelStyle: {
+            color: colorScheme === "dark" ? "#ffff" : "gray", // Change title color here
+          },
         }}
       />
-
       <Tabs.Screen
         name="recos"
         options={{
           title: "History",
           tabBarIcon: ({ color, focused }) => (
-            <MaterialIcons name="history" size={30} color="black" />
-          ),
-        }}
-      />
-
-      <Tabs.Screen
-        name="scan"
-        options={{
-          title: "Scan",
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon
-              name={focused ? "scan" : "scan-outline"}
-              color={color}
+            <MaterialIcons
+              name="history"
+              size={30}
+              color={colorScheme === "dark" ? "white" : "black"}
             />
           ),
+          tabBarLabelStyle: {
+            color: colorScheme === "dark" ? "#ffff" : "gray", // Change title color here
+          },
         }}
       />
 
@@ -66,8 +91,15 @@ export default function TabLayout() {
         options={{
           title: "Search",
           tabBarIcon: ({ color, focused }) => (
-            <AntDesign name="search1" size={30} color="black" />
+            <AntDesign
+              name="search1"
+              size={30}
+              color={colorScheme === "dark" ? "white" : "black"}
+            />
           ),
+          tabBarLabelStyle: {
+            color: colorScheme === "dark" ? "#ffff" : "gray", // Change title color here
+          },
         }}
       />
     </Tabs>

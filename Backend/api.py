@@ -21,4 +21,4 @@ def search(code):
 
 if __name__ == '__main__':
     # Update host to your local IP address
-    app.run(debug=True, host='10.56.21.241', port=5050)
+    app.run(debug=True, host='10.56.224.52', port=5050)

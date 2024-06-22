@@ -1,8 +1,18 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, StyleSheet, Button } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  Button,
+  Dimensions,
+  Pressable,
+} from "react-native";
 import { CameraView, Camera } from "expo-camera";
 import ItemComponent from "@/components/ItemInformation";
 import axios from "axios";
+
+const { width, height } = Dimensions.get("window");
+const scopeSize = 300;
 
 export default function App() {
   const [hasPermission, setHasPermission] = useState(false);
@@ -22,11 +32,11 @@ export default function App() {
     getCameraPermissions();
   }, []);
 
-  const handleBarCodeScanned = ({ type, data }) => {
+  const handleBarCodeScanned = ({ type, data }: any) => {
     setScanned(true);
     axios
       // Update the URL to match the IP address of your backend server
-      .get(`http://10.56.21.241:5050/search/${data}`)
+      .get(`http://10.56.224.52:5050/search/${data}`)
 
       .then((response) => {
         setItemData({
@@ -72,6 +82,24 @@ export default function App() {
         }}
         style={StyleSheet.absoluteFillObject}
       />
+
+      <Pressable
+        style={styles.scopeContainer}
+        onPress={() => setScanned(false)}
+      >
+        <View style={[styles.overlay, { height: (height - scopeSize) / 2 }]} />
+        <View style={styles.middleRow}>
+          <View style={[styles.overlay, { width: (width - scopeSize) / 2 }]} />
+          <View style={styles.scope}>
+            {/* Text added here to be inside the scan box */}
+            <View style={styles.textInsideScope}>
+              <Text style={styles.whiteText}>Scan Barcode</Text>
+            </View>
+          </View>
+          <View style={[styles.overlay, { width: (width - scopeSize) / 2 }]} />
+        </View>
+        <View style={[styles.overlay, { height: (height - scopeSize) / 2 }]} />
+      </Pressable>
       {scanned && itemData && (
         <View style={styles.itemContainer}>
           <ItemComponent
@@ -94,6 +122,46 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     justifyContent: "center",
+    alignItems: "center",
+  },
+  textInsideScope: {
+    position: "absolute",
+    bottom: 0,
+    width: "100%",
+    alignItems: "center",
+    paddingBottom: 2,
+  },
+  textContainer: {
+    alignItems: "center",
+  },
+  whiteText: {
+    color: "white",
+    fontSize: 20,
+    margin: 5,
+  },
+  scopeContainer: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  overlay: {
+    backgroundColor: "rgba(0,0,0,0.5)",
+  },
+  middleRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  scope: {
+    width: 300,
+    height: 200,
+    borderWidth: 1,
+    borderColor: "white",
+    borderRadius: 20,
   },
   itemContainer: {
     position: "absolute",
