@@ -4,6 +4,10 @@ import React from "react";
 import { TabBarIcon } from "@/components/navigation/TabBarIcon";
 import { Colors } from "@/constants/Colors";
 import { useColorScheme } from "@/hooks/useColorScheme";
+import { FontAwesome5 } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
+import { MaterialIcons } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -15,30 +19,35 @@ export default function TabLayout() {
         headerShown: false,
       }}
     >
-      <Tabs.Screen
+<Tabs.Screen
         name="index"
         options={{
           title: "Home",
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon
-              name={focused ? "home" : "home-outline"}
-              color={color}
-            />
+            <Feather name="home" size={24} color="black" />
           ),
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="star"
         options={{
-          title: "Explore",
+          title: "Star",
           tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon
-              name={focused ? "code-slash" : "code-slash-outline"}
-              color={color}
-            />
+            <Feather name="star" size={24} color="black" />
           ),
         }}
       />
+
+      <Tabs.Screen
+        name="recos"
+        options={{
+          title: "History",
+          tabBarIcon: ({ color, focused }) => (
+            <MaterialIcons name="history" size={30} color="black" />
+          ),
+        }}
+      />
+
       <Tabs.Screen
         name="scan"
         options={{
@@ -48,6 +57,12 @@ export default function TabLayout() {
               name={focused ? "scan" : "scan-outline"}
               color={color}
             />
+       <Tabs.Screen
+        name="Search"
+        options={{
+          title: "Search",
+          tabBarIcon: ({ color, focused }) => (
+            <AntDesign name="search1" size={30} color="black" />
           ),
         }}
       />
