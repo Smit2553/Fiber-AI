@@ -1,7 +1,10 @@
 import openfoodfacts
 from flask import Flask, request, jsonify
+from flask_cors import CORS 
+
 
 app = Flask(__name__)
+CORS(app)
 
 api = openfoodfacts.API(user_agent='LiveLaughToasterBath/1.0')
 
@@ -17,4 +20,5 @@ def search(code):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # Update host to your local IP address
+    app.run(debug=True, host='10.56.21.241', port=5050)
