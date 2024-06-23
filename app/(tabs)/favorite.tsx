@@ -27,7 +27,7 @@ export default function star() {
         {favorites.map((element) => (
           <View style={styles.element}>
             <FavItemComponent
-              key={Math.random()}
+              key={element.key}
               imageSource={element.imageSource}
               title={element.title}
               rating={element.rating}
@@ -124,23 +124,27 @@ const favorites = [
       "https://images.openfoodfacts.org/images/products/301/762/042/2003/front_en.633.400.jpg",
     title: "Nutella",
     rating: "32/100",
+    key: "1",
   },
   {
     imageSource:
       "https://images.openfoodfacts.org/images/products/500/015/946/1122/front_en.267.400.jpg",
     title: "Snickers",
     rating: "12/100",
+    key: "2",
   },
   {
     imageSource:
       "https://images.openfoodfacts.org/images/products/405/648/945/1136/front_da.18.400.jpg",
     title: "Vegan Pizza - Bruschetta - Vemondo",
     rating: "30/100",
+    key: "3",
   },
   {
     imageSource:
       "https://images.openfoodfacts.org/images/products/20951337/front_da.47.400.jpg",
     title: "Chicken Nuggets",
     rating: "40/100",
+    key: "4",
   },
 ];
