@@ -193,7 +193,7 @@ const styles = StyleSheet.create({
   flashButtonOn: {
     backgroundColor: "gray",
     position: "absolute",
-    left: 20,
+    left: 12,
     top: 80,
     padding: 15,
     borderRadius: 100,
@@ -201,7 +201,7 @@ const styles = StyleSheet.create({
   flashButtonOff: {
     backgroundColor: "white",
     position: "absolute",
-    left: 20,
+    left: 12,
     top: 80,
     padding: 15,
     borderRadius: 100,
