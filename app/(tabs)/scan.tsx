@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Text,
   View,
@@ -6,8 +6,9 @@ import {
   Button,
   Dimensions,
   Pressable,
+  Animated,
 } from "react-native";
-import { CameraView, Camera, FlashMode } from "expo-camera";
+import { CameraView, Camera } from "expo-camera";
 import ItemComponent from "@/components/ItemInformation";
 import axios from "axios";
 import { Ionicons } from "@expo/vector-icons";
@@ -24,6 +25,9 @@ export default function App() {
     title: string;
     rating: string;
   } | null>(null);
+  const deviceip = process.env.EXPO_PUBLIC_DEVICEIP;
+
+  const translateY = useRef(new Animated.Value(height)).current; // Initial position off-screen (bottom)
 
   const handleFlash = () => {
     setFlash((prev) => !prev);
@@ -38,12 +42,27 @@ export default function App() {
     getCameraPermissions();
   }, []);
 
+  useEffect(() => {
+    if (scanned && itemData) {
+      Animated.timing(translateY, {
+        toValue: 0, // Final position
+        duration: 500, // Animation duration in milliseconds
+        useNativeDriver: true,
+      }).start();
+    } else {
+      Animated.timing(translateY, {
+        toValue: height, // Move it back off-screen
+        duration: 500, // Animation duration in milliseconds
+        useNativeDriver: true,
+      }).start();
+    }
+  }, [scanned, itemData]);
+
   const handleBarCodeScanned = ({ type, data }: any) => {
     setScanned(true);
     axios
       // Update the URL to match the IP address of your backend server
-      .get(`http://10.56.224.52:5050/search/${data}`)
-
+      .get(`http://${deviceip}:5050/search/${data}`)
       .then((response) => {
         setItemData({
           imageSource: response.data.image_url,
@@ -51,14 +70,25 @@ export default function App() {
           rating: response.data.code,
         });
       })
-      .catch(function (error) {
+      .catch((error) => {
         console.log(error);
         setItemData({
           imageSource: "https://via.placeholder.com/50",
           title: data,
-          rating: "0/100",
+          rating: "Unable to fetch data",
         });
       });
+  };
+
+  const handleScanAgain = () => {
+    Animated.timing(translateY, {
+      toValue: height, // Move it back off-screen
+      duration: 500, // Animation duration in milliseconds
+      useNativeDriver: true,
+    }).start(() => {
+      setScanned(false);
+      setItemData(null);
+    });
   };
 
   if (hasPermission === null) {
@@ -90,35 +120,30 @@ export default function App() {
         style={StyleSheet.absoluteFillObject}
       />
 
-      <Pressable
-        style={styles.scopeContainer}
-        onPress={() => setScanned(false)}
-      >
-        <View style={[styles.overlay, { height: (height - scopeSize) / 2 }]} />
-        <View style={styles.middleRow}>
-          <View style={[styles.overlay, { width: (width - scopeSize) / 2 }]} />
-          <View style={styles.scope}>
-            {/* Text added here to be inside the scan box */}
-            <View style={styles.textInsideScope}>
-              <Text style={styles.whiteText}>Scan Barcode</Text>
-            </View>
+      <View style={[styles.overlay, { height: (height - scopeSize) / 2 }]} />
+      <View style={styles.middleRow}>
+        <View style={[styles.overlay, { width: (width - scopeSize) / 2 }]} />
+        <View style={styles.scope}>
+          {/* Text added here to be inside the scan box */}
+          <View style={styles.textInsideScope}>
+            <Text style={styles.whiteText}>Scan Barcode</Text>
           </View>
-          <View style={[styles.overlay, { width: (width - scopeSize) / 2 }]} />
         </View>
-        <View style={[styles.overlay, { height: (height - scopeSize) / 2 }]} />
-      </Pressable>
+        <View style={[styles.overlay, { width: (width - scopeSize) / 2 }]} />
+      </View>
+      <View style={[styles.overlay, { height: (height - scopeSize) / 2 }]} />
+
       {scanned && itemData && (
-        <View style={styles.itemContainer}>
+        <Animated.View
+          style={[styles.itemContainer, { transform: [{ translateY }] }]}
+        >
           <ItemComponent
             imageSource={itemData.imageSource}
             title={itemData.title}
             rating={itemData.rating}
           />
-          <Button
-            title={"Tap to Scan Again"}
-            onPress={() => setScanned(false)}
-          />
-        </View>
+          <Button title={"Tap to Scan Again"} onPress={handleScanAgain} />
+        </Animated.View>
       )}
       <Pressable
         style={flash ? styles.flashButtonOn : styles.flashButtonOff}
