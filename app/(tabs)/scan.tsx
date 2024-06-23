@@ -7,14 +7,16 @@ import {
   Dimensions,
   Pressable,
 } from "react-native";
-import { CameraView, Camera } from "expo-camera";
+import { CameraView, Camera, FlashMode } from "expo-camera";
 import ItemComponent from "@/components/ItemInformation";
 import axios from "axios";
+import { Ionicons } from "@expo/vector-icons";
 
 const { width, height } = Dimensions.get("window");
 const scopeSize = 300;
 
 export default function App() {
+  const [flash, setFlash] = useState(false);
   const [hasPermission, setHasPermission] = useState(false);
   const [scanned, setScanned] = useState(false);
   const [itemData, setItemData] = useState<{
@@ -22,6 +24,11 @@ export default function App() {
     title: string;
     rating: string;
   } | null>(null);
+
+  const handleFlash = () => {
+    setFlash((prev) => !prev);
+    console.log(flash);
+  };
 
   useEffect(() => {
     const getCameraPermissions = async () => {
@@ -65,6 +72,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <CameraView
+        enableTorch={flash}
         onBarcodeScanned={scanned ? undefined : handleBarCodeScanned}
         barcodeScannerSettings={{
           barcodeTypes: [
@@ -113,6 +121,12 @@ export default function App() {
           />
         </View>
       )}
+      <Pressable
+        style={flash ? styles.flashButtonOn : styles.flashButtonOff}
+        onPress={handleFlash}
+      >
+        <Ionicons name="flashlight" size={24} color="black" />
+      </Pressable>
     </View>
   );
 }
@@ -172,5 +186,21 @@ const styles = StyleSheet.create({
     width: "100%",
     padding: 10,
     backgroundColor: "#fff",
+  },
+  flashButtonOn: {
+    backgroundColor: "gray",
+    position: "absolute",
+    left: 20,
+    top: 80,
+    padding: 15,
+    borderRadius: 100,
+  },
+  flashButtonOff: {
+    backgroundColor: "white",
+    position: "absolute",
+    left: 20,
+    top: 80,
+    padding: 15,
+    borderRadius: 100,
   },
 });
