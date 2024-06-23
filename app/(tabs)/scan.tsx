@@ -27,7 +27,6 @@ export default function App() {
 
   const handleFlash = () => {
     setFlash((prev) => !prev);
-    console.log(flash);
   };
 
   useEffect(() => {
@@ -125,7 +124,11 @@ export default function App() {
         style={flash ? styles.flashButtonOn : styles.flashButtonOff}
         onPress={handleFlash}
       >
-        <Ionicons name="flashlight" size={24} color="black" />
+        <Ionicons
+          name="flashlight"
+          size={24}
+          color={flash ? "white" : "#FF7F3E"}
+        />
       </Pressable>
     </View>
   );
@@ -149,7 +152,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   whiteText: {
-    color: "white",
+    color: "#FF7F3E",
     fontSize: 20,
     margin: 5,
   },
