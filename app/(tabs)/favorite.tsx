@@ -16,16 +16,15 @@ import { Feather } from "@expo/vector-icons";
 export default function star() {
   return (
     <View>
-      <ScrollView>
-        <View style={styles.header}>
-          <Text style={{ fontSize: 30, fontWeight: "bold", color: "white" }}>
-            Favorites
-          </Text>
-          <View style={styles.headerRight}>
-            <AntDesign name="questioncircleo" size={28} color="white" />
-          </View>
+      <View style={styles.header}>
+        <Text style={{ fontSize: 30, fontWeight: "bold", color: "white" }}>
+          Favorites
+        </Text>
+        <View style={styles.headerRight}>
+          <AntDesign name="questioncircleo" size={28} color="white" />
         </View>
-
+      </View>
+      <ScrollView>
         {favorites.map((element, i) => (
           <View style={styles.element} key={i}>
             <FavItemComponent
@@ -35,8 +34,6 @@ export default function star() {
             />
           </View>
         ))}
-
-        {/* Add more ItemComponent instances as needed */}
       </ScrollView>
     </View>
   );
@@ -73,7 +70,6 @@ const FavItemComponent: React.FC<ItemComponentProps> = ({
 const styles = StyleSheet.create({
   header: {
     backgroundColor: "#FF7F3E",
-    flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
     padding: 20,
