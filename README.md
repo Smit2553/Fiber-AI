@@ -1,7 +1,5 @@
 # 🥑 Fiber - The AI powered app that rates your grocery products. (CalHacks 2024)
 
-## Team name: LiveLaughToasterBath
-
 ## Geting started
 
 This project was created with React Native, Expo, Python, Flask, and OpenAI's API.
@@ -13,7 +11,13 @@ This project was created with React Native, Expo, Python, Flask, and OpenAI's AP
 - [Python](https://www.python.org/)
 - [OpenAI API](https://platform.openai.com/docs/overview)
 
-### Install dependencies/ Start the app (Make sure you have the environment set up)
+### Install dependencies/ Start the app
+
+Create a new .env file, insert your IP address to run in the local environment:
+
+`EXPO_PUBLIC_DEVICEIP = "YOUR IP ADDRESS"`
+
+Then:
 
 ```
 (For frontend)
