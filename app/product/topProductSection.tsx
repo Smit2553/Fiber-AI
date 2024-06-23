@@ -1,6 +1,7 @@
 import React from 'react';
-import {Text, View, StyleSheet} from 'react-native';
+import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 import ProductSection from '@/components/ProductSection';
+import * as Linking from 'expo-linking';
 
 function testProduct(a: string, b: string, c: string) {
     let product = {
