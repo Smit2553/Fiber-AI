@@ -14,7 +14,7 @@ export default function topProducts() {
 
     const handleButtonClick = (index: number) => {
         // 0 = none, 1 = food, 2 = drink, 3 = snack
-        console.log(showPreview);
+        // console.log(showPreview);
         if (index === showPreview) {
             setShowPreview(0);
         } else {
@@ -68,6 +68,7 @@ export default function topProducts() {
             </View>
 
             {/* conditionally render items */}
+            {/* TODO: fix routing */}
             {showPreview > 0 && (
                     <View style={styles.dataContainer}>
                         {/* <Link href="/food"></Link> */}
@@ -93,14 +94,14 @@ const styles = StyleSheet.create({
     mainText: {
         color: 'black',
     },
-    contentContainer: {
-        paddingTop: 20,
-        paddingBottom: 20,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        color: 'black',
-    },
+    // contentContainer: {
+    //     paddingTop: 20,
+    //     paddingBottom: 20,
+    //     display: 'flex',
+    //     alignItems: 'center',
+    //     justifyContent: 'center',
+    //     color: 'black',
+    // },
     dataContainer: {
         display: 'flex',
         alignItems: 'center',
