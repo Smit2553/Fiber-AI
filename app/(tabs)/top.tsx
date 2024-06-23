@@ -53,6 +53,8 @@ export default function TopProducts() {
       setItems(["Sports Drinks", "Energy Drinks", "Soda"]);
     } else if (index === 3) {
       setItems(["Chips", "Nuts", "Baked Goods"]);
+    } else if (index === 0) {
+      setItems([]);
     }
   };
 
@@ -65,7 +67,7 @@ export default function TopProducts() {
         <Pressable style={styles.buttonFix} onPress={handleFilterClick}>
           <MaterialIcons
             name="filter-list"
-            style={{ paddingRight: 5 }}
+            style={{ paddingRight: '1%' }}
             size={24}
             color={showFilter ? "orange" : "black"}
           />
@@ -73,7 +75,7 @@ export default function TopProducts() {
         </Pressable>
       </View>
 
-      <View style={{ marginTop: -20 }}>
+      <View style={{ marginTop: -20, width:'100%' }}>
         <View style={styles.catContainer}>
           <Pressable
             style={styles.catCard}
@@ -102,7 +104,7 @@ export default function TopProducts() {
           </Pressable>
         </View>
 
-        {showPreview > 0 && (
+        {/* {showPreview > 0 && (
           <View style={styles.dataContainer}>
             {items.map((item, index) => (
               <Link
@@ -114,7 +116,24 @@ export default function TopProducts() {
               </Link>
             ))}
           </View>
-        )}
+        )} */}
+
+        <View style={styles.dataContainer}>
+          {items.map((item, index) => (
+            <>
+            <View style={styles.dataItems}>
+            <Link
+              href={`/topProduct/${item}`}
+              key={index}
+              // style={styles.dataItems}
+              style={{width:'100%'}}
+            >
+              {item}
+            </Link>
+            </View>
+            </>
+          ))}
+        </View>
 
         {showFilter && (
           <View style={styles.filterWindow}>
@@ -193,7 +212,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   dataContainer: {
-    display: "flex",
+    display: 'flex',
     alignItems: "center",
     color: "black",
     width: "100%",
