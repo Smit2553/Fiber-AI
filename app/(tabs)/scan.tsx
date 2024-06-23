@@ -12,6 +12,7 @@ import { CameraView, Camera } from "expo-camera";
 import ItemComponent from "@/components/ItemInformation";
 import axios from "axios";
 import { Ionicons } from "@expo/vector-icons";
+import { AntDesign } from "@expo/vector-icons";
 
 const { width, height } = Dimensions.get("window");
 const scopeSize = 300;
@@ -20,6 +21,7 @@ export default function App() {
   const [flash, setFlash] = useState(false);
   const [hasPermission, setHasPermission] = useState(false);
   const [scanned, setScanned] = useState(false);
+  const [moreInfo, setMoreInfo] = useState(false);
   const [itemData, setItemData] = useState<{
     imageSource: string;
     title: string;
@@ -27,10 +29,27 @@ export default function App() {
   } | null>(null);
   const deviceip = process.env.EXPO_PUBLIC_DEVICEIP;
 
+  const expandedScaleY = useRef(new Animated.Value(0)).current;
+  const expandedOpacity = useRef(new Animated.Value(0)).current;
+
   const translateY = useRef(new Animated.Value(height)).current; // Initial position off-screen (bottom)
+
+  const moreInfoTranslateY = useRef(new Animated.Value(height)).current;
 
   const handleFlash = () => {
     setFlash((prev) => !prev);
+  };
+
+  const handleMoreInfo = () => {
+    if (!moreInfo) {
+      setMoreInfo(true);
+    } else {
+      Animated.timing(moreInfoTranslateY, {
+        toValue: height, // Slide down to hide the more info box
+        duration: 500,
+        useNativeDriver: true,
+      }).start(() => setMoreInfo(false));
+    }
   };
 
   useEffect(() => {
@@ -57,6 +76,22 @@ export default function App() {
       }).start();
     }
   }, [scanned, itemData]);
+
+  useEffect(() => {
+    if (moreInfo) {
+      Animated.timing(moreInfoTranslateY, {
+        toValue: 0, // Slide up to show the more info box
+        duration: 500,
+        useNativeDriver: true,
+      }).start();
+    } else {
+      Animated.timing(moreInfoTranslateY, {
+        toValue: height, // Slide down to hide the more info box
+        duration: 500,
+        useNativeDriver: true,
+      }).start();
+    }
+  }, [moreInfo]);
 
   const handleBarCodeScanned = ({ type, data }: any) => {
     setScanned(true);
@@ -121,6 +156,7 @@ export default function App() {
         style={StyleSheet.absoluteFillObject}
       />
 
+      {/*Camera Box*/}
       <View style={[styles.overlay, { height: (height - scopeSize) / 2 }]} />
       <View style={styles.middleRow}>
         <View style={[styles.overlay, { width: (width - scopeSize) / 2 }]} />
@@ -134,16 +170,44 @@ export default function App() {
       </View>
       <View style={[styles.overlay, { height: (height - scopeSize) / 2 }]} />
 
+      {/*Info Box*/}
       {scanned && itemData && (
         <Animated.View
           style={[styles.itemContainer, { transform: [{ translateY }] }]}
         >
+          <Pressable onPress={() => handleMoreInfo()}>
+            <AntDesign name="up" size={24} color="black" />
+          </Pressable>
+
           <ItemComponent
             imageSource={itemData.imageSource}
             title={itemData.title}
             rating={itemData.rating}
           />
           <Button title={"Tap to Scan Again"} onPress={handleScanAgain} />
+        </Animated.View>
+      )}
+
+      {/*More Info Box*/}
+      {moreInfo && itemData && (
+        <Animated.View
+          style={[
+            styles.itemContainerExpanded,
+            { transform: [{ translateY: moreInfoTranslateY }] },
+          ]}
+        >
+          <Pressable onPress={() => handleMoreInfo()}>
+            <AntDesign name="down" size={24} color="black" />
+          </Pressable>
+
+          <ItemComponent
+            imageSource={itemData.imageSource}
+            title={itemData.title}
+            rating={itemData.rating}
+          />
+          <View style={{ marginTop: "auto" }}>
+            <Button title={"Tap to Scan Again"} onPress={handleScanAgain} />
+          </View>
         </Animated.View>
       )}
       <Pressable
@@ -215,20 +279,33 @@ const styles = StyleSheet.create({
     width: "100%",
     padding: 10,
     backgroundColor: "#fff",
+    alignItems: "center",
+  },
+  itemContainerExpanded: {
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    position: "absolute",
+    bottom: 0,
+    width: "100%",
+    padding: 10,
+    height: height * 0.7, // Set the maximum height
+    backgroundColor: "#fff",
+    alignItems: "center",
+    transform: [{ translateY: height }], // Initial position off-screen
   },
   flashButtonOn: {
     backgroundColor: "gray",
     position: "absolute",
-    left: 12,
-    top: 80,
+    left: 20,
+    top: 60,
     padding: 15,
     borderRadius: 100,
   },
   flashButtonOff: {
     backgroundColor: "white",
     position: "absolute",
-    left: 12,
-    top: 80,
+    left: 20,
+    top: 60,
     padding: 15,
     borderRadius: 100,
   },

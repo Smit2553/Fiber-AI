@@ -78,7 +78,7 @@ export default function TabLayout() {
           },
         }}
       />
-      <Tabs.Screen
+      {/* <Tabs.Screen
         name="recos"
         options={{
           title: "History",
@@ -95,26 +95,26 @@ export default function TabLayout() {
             color: colorScheme === "dark" ? "#ffff" : "gray", // Change title color here
           },
         }}
-      />
+      /> */}
 
       <Tabs.Screen
-              name="topProduct"
-              options={{
-                title: "Top",
-                tabBarIcon: ({ color, focused }) => (
-                  <MaterialIcons
-                    name="leaderboard"
-                    size={30}
-                    color={
-                      focused ? "#FF7F3E" : colorScheme === "dark" ? "white" : "black"
-                    }
-                  />
-                ),
-                tabBarLabelStyle: {
-                  color: colorScheme === "dark" ? "#ffff" : "gray", // Change title color here
-                },
-              }}
+        name="top"
+        options={{
+          title: "Top",
+          tabBarIcon: ({ color, focused }) => (
+            <MaterialIcons
+              name="leaderboard"
+              size={30}
+              color={
+                focused ? "#FF7F3E" : colorScheme === "dark" ? "white" : "black"
+              }
             />
+          ),
+          tabBarLabelStyle: {
+            color: colorScheme === "dark" ? "#ffff" : "gray", // Change title color here
+          },
+        }}
+      />
 
       <Tabs.Screen
         name="search"

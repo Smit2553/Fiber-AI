@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     flexWrap: "nowrap",
     borderRadius: 20,
+    gap: 5,
   },
   description: {
     flexDirection: "column",
