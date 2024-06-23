@@ -42,7 +42,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="star"
         options={{
-          title: "Star",
+          title: "Favorites",
           tabBarIcon: ({ color, focused }) => (
             <Feather
               name="star"
