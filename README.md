@@ -1,4 +1,8 @@
 # 🥑 Fiber - The AI powered app that rates your grocery products. (CalHacks 2024)
+<img width="1165" alt="Screenshot 2024-06-23 at 10 54 23 AM" src="https://github.com/Smit2553/LiveLaughToasterBath/assets/153343039/0beea2e9-e32d-496a-9373-fae2c7e0fbdc">
+
+
+
 
 ## Geting started
 
