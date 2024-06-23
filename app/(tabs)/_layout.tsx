@@ -78,7 +78,7 @@ export default function TabLayout() {
           },
         }}
       />
-      <Tabs.Screen
+      {/* <Tabs.Screen
         name="recos"
         options={{
           title: "History",
@@ -95,7 +95,7 @@ export default function TabLayout() {
             color: colorScheme === "dark" ? "#ffff" : "gray", // Change title color here
           },
         }}
-      />
+      /> */}
 
       <Tabs.Screen
         name="top"
