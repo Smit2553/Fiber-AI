@@ -13,6 +13,7 @@ import ItemComponent from "@/components/ItemInformation";
 import axios from "axios";
 import { Ionicons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
+import IngredientSummary from "@/components/aiSummary";
 
 const { width, height } = Dimensions.get("window");
 const scopeSize = 300;
@@ -27,6 +28,8 @@ export default function App() {
     title: string;
     rating: string;
   } | null>(null);
+  const [ingredients, setIngredients] = useState<string | null>(null);
+  const [allergens, setAllergens] = useState<string[]>([]);
   const deviceip = process.env.EXPO_PUBLIC_DEVICEIP;
 
   const expandedScaleY = useRef(new Animated.Value(0)).current;
@@ -102,17 +105,26 @@ export default function App() {
         setItemData({
           imageSource: response.data.image_url,
           title: response.data.product_name,
-          rating: response.data.code,
+          rating: response.data.brands,
         });
-        console.log(response);
+        setIngredients(response.data.ingredients_text_en);
+        const allergensArray = response.data.allergens
+          .split(",")
+          .map((allergen) => allergen.trim().slice(3));
+
+        if (allergensArray[0] === "") {
+          setAllergens(["None"]);
+        } else {
+          setAllergens(allergensArray);
+        }
       })
       .catch((error) => {
-        console.log(error);
         setItemData({
           imageSource: "https://via.placeholder.com/50",
           title: data,
           rating: "Unable to fetch data",
         });
+        setIngredients(null);
       });
   };
 
@@ -196,15 +208,19 @@ export default function App() {
             { transform: [{ translateY: moreInfoTranslateY }] },
           ]}
         >
-          <Pressable onPress={() => handleMoreInfo()}>
-            <AntDesign name="down" size={24} color="black" />
-          </Pressable>
+          <View style={styles.downArrow}>
+            <Pressable onPress={() => handleMoreInfo()}>
+              <AntDesign name="down" size={24} color="black" />
+            </Pressable>
+          </View>
 
           <ItemComponent
             imageSource={itemData.imageSource}
             title={itemData.title}
             rating={itemData.rating}
           />
+          <IngredientSummary ingredients={ingredients} allergens={allergens} />
+
           <View style={{ marginTop: "auto" }}>
             <Button title={"Tap to Scan Again"} onPress={handleScanAgain} />
           </View>
@@ -290,7 +306,7 @@ const styles = StyleSheet.create({
     padding: 10,
     height: height * 0.7, // Set the maximum height
     backgroundColor: "#fff",
-    alignItems: "center",
+
     transform: [{ translateY: height }], // Initial position off-screen
   },
   flashButtonOn: {
@@ -308,5 +324,9 @@ const styles = StyleSheet.create({
     top: 60,
     padding: 15,
     borderRadius: 100,
+  },
+
+  downArrow: {
+    alignItems: "center",
   },
 });
