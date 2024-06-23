@@ -69,6 +69,7 @@ export default function App() {
           title: response.data.product_name,
           rating: response.data.code,
         });
+        console.log(response);
       })
       .catch((error) => {
         console.log(error);

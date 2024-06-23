@@ -19,6 +19,9 @@ export default function TabLayout() {
         tabBarActiveTintColor: Colors[colorScheme ?? "light"].tint,
         tabBarInactiveTintColor: colorScheme === "dark" ? "#ffff" : "gray",
         headerShown: false,
+        tabBarStyle: {
+          height: 90,
+        },
       }}
     >
       <Tabs.Screen
@@ -40,7 +43,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="star"
+        name="favorite"
         options={{
           title: "Favorites",
           tabBarIcon: ({ color, focused }) => (
