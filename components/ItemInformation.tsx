@@ -29,9 +29,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 10,
     backgroundColor: "#fff",
+    flexWrap: "nowrap",
   },
   description: {
     flexDirection: "column",
+    flex: 1,
   },
   image: {
     width: 100,
