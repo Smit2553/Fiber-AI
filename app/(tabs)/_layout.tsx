@@ -98,23 +98,23 @@ export default function TabLayout() {
       />
 
       <Tabs.Screen
-              name="topProduct"
-              options={{
-                title: "Top",
-                tabBarIcon: ({ color, focused }) => (
-                  <MaterialIcons
-                    name="leaderboard"
-                    size={30}
-                    color={
-                      focused ? "#FF7F3E" : colorScheme === "dark" ? "white" : "black"
-                    }
-                  />
-                ),
-                tabBarLabelStyle: {
-                  color: colorScheme === "dark" ? "#ffff" : "gray", // Change title color here
-                },
-              }}
+        name="top"
+        options={{
+          title: "Top",
+          tabBarIcon: ({ color, focused }) => (
+            <MaterialIcons
+              name="leaderboard"
+              size={30}
+              color={
+                focused ? "#FF7F3E" : colorScheme === "dark" ? "white" : "black"
+              }
             />
+          ),
+          tabBarLabelStyle: {
+            color: colorScheme === "dark" ? "#ffff" : "gray", // Change title color here
+          },
+        }}
+      />
 
       <Tabs.Screen
         name="search"
