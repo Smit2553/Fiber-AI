@@ -50,6 +50,7 @@ export default function App() {
           title: response.data.product_name,
           rating: response.data.code,
         });
+        console.log(response);
       })
       .catch(function (error) {
         console.log(error);

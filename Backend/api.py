@@ -15,6 +15,7 @@ def get():
 @app.route('/search/<string:code>', methods=['GET'])
 def search(code):
     product = api.product.get(code, fields=['status_id','product_name', 'brands', 'ingredients_text_en', 'allergens', 'nutriments', 'code', 'image_url'])
+    
     return jsonify(product)
 
 
