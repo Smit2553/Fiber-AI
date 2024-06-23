@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Image, Text, Pressable } from "react-native";
+import { View, StyleSheet, Image, Text, Pressable, ScrollView} from "react-native";
 import MyComponent from "@/components/Search";
 
 
@@ -29,6 +29,7 @@ export default function SearchScreen() {
         <Text style={{margin: 20, fontSize: 22, fontWeight: 'bold'}}> Search Results </Text>
 
         {/* Items container */}
+        <ScrollView> 
         <View style={styles.itemsContainer}> 
           <View style={styles.itemsCard}>
             <Image
@@ -38,7 +39,7 @@ export default function SearchScreen() {
               }}
             />
             <View>
-              <Text style={styles.foodText}> Apple </Text>
+              <Text style={styles.foodText}> Watermelon </Text>
               <Text style={{color: 'gray'}}> ⭐100/100 - Food </Text>
             </View>
           </View>
@@ -66,10 +67,22 @@ export default function SearchScreen() {
               <Text style={{color: 'gray'}}> ⭐17/100 - Drink </Text>
             </View>
           </View>  
+          <View style={styles.itemsCard}>
+            <Image
+              style={styles.foodPic}
+              source={{
+                uri: 'https://www.eatthis.com/wp-content/uploads/sites/4//media/images/ext/993191471/roast-chicken-how-buy-healthiest-chicken.jpg?quality=82&strip=1',
+              }}
+            />
+            <View>
+              <Text style={styles.foodText}> Chicken </Text>
+              <Text style={{color: 'gray'}}> ⭐95/100 - Food </Text>
+            </View>
+          </View> 
         </View>
-
-      </View>
+      </ScrollView>
     </View>
+  </View>
   );
 }
 
