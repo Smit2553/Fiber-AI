@@ -67,7 +67,7 @@ export default function TopProducts() {
         <Pressable style={styles.buttonFix} onPress={handleFilterClick}>
           <MaterialIcons
             name="filter-list"
-            style={{ paddingRight: '1%' }}
+            style={{ paddingRight: "1%" }}
             size={24}
             color={showFilter ? "orange" : "black"}
           />
@@ -75,7 +75,7 @@ export default function TopProducts() {
         </Pressable>
       </View>
 
-      <View style={{ marginTop: -20, width:'100%' }}>
+      <View style={{ marginTop: -20, width: "100%" }}>
         <View style={styles.catContainer}>
           <Pressable
             style={styles.catCard}
@@ -121,16 +121,16 @@ export default function TopProducts() {
         <View style={styles.dataContainer}>
           {items.map((item, index) => (
             <>
-            <View style={styles.dataItems}>
-            <Link
-              href={`/topProduct/${item}`}
-              key={index}
-              // style={styles.dataItems}
-              style={{width:'100%'}}
-            >
-              {item}
-            </Link>
-            </View>
+              <View style={styles.dataItems} key={index}>
+                <Link
+                  href={`/topProduct/${item}`}
+                  key={index}
+                  // style={styles.dataItems}
+                  style={{ width: "100%" }}
+                >
+                  {item}
+                </Link>
+              </View>
             </>
           ))}
         </View>
@@ -212,7 +212,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   dataContainer: {
-    display: 'flex',
+    display: "flex",
     alignItems: "center",
     color: "black",
     width: "100%",

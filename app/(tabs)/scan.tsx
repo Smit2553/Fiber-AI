@@ -156,7 +156,6 @@ export default function App() {
             "aztec",
             "ean13",
             "ean8",
-            "qr",
             "pdf417",
             "upc_e",
             "code39",
