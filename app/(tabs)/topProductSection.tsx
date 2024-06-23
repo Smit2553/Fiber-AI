@@ -26,7 +26,16 @@ export default function topProductSection() {
 
     return (
         <View>
+            <Text style={styles.title}>Food - Test</Text>
             <ProductSection propArray={propArray} />
         </View>
     );
 }
+
+const styles = StyleSheet.create({
+    title: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        padding: 10,
+    }
+});
