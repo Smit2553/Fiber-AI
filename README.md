@@ -48,7 +48,3 @@ The instructions can be found at [Expo Documentation](https://docs.expo.dev/get-
 ### Development
 
 You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-```
-
-```
