@@ -1,3 +1,4 @@
+import React, { useEffect } from 'react';
 import { Image, StyleSheet, Platform, Text, View } from 'react-native';
 import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
@@ -6,16 +7,35 @@ import { Octicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
 import { FontAwesome6 } from '@expo/vector-icons';
-import Cat from '@/components/categories';
-
+import Animated, { useSharedValue, useAnimatedStyle, withSpring } from 'react-native-reanimated';
 
 export default function HomeScreen() {
+  const imageTranslateX = useSharedValue(-100); 
+  const catScale = useSharedValue(0.5);
+
+  useEffect(() => {
+    imageTranslateX.value = withSpring(0, { damping: 5, stiffness: 100 }); 
+    catScale.value = withSpring(1, { damping: 5, stiffness: 150 });
+  }, []);
+
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ translateX: imageTranslateX.value }],
+    };
+  });
+
+  const catCardAnimatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ scale: catScale.value }],
+    };
+  });
+
   return (
     <View style={styles.bodyContainer}> 
       <Octicons name="feed-person" size={40} color="black" style={{paddingLeft: 10, margin: 0, }} />
       <View style={{position:'relative', top: -30}}> 
-        <Image
-          style={styles.foodGirl}
+        <Animated.Image
+          style={[styles.foodGirl, animatedStyle]}
           source={{
             uri: 'https://www.goteso.com/products/assets/images/clone-scripts/doordash/doordash-clone-banner.png',
           }}
@@ -26,21 +46,20 @@ export default function HomeScreen() {
           Categories
         </Text>
         <View style={styles.catContainer}> 
-          <View style={styles.catCard}>
+          <Animated.View style={[styles.catCard, catCardAnimatedStyle]}>
             <MaterialCommunityIcons name="food-apple-outline" size={50} color="black" />
             <Text> Food </Text>
-          </View>
-          <View style={styles.catCard}>
+          </Animated.View>
+          <Animated.View style={[styles.catCard, catCardAnimatedStyle]}>
             <Entypo name="drink" size={50} color="black" />
             <Text> Drinks</Text>
-          </View>
-          <View style={styles.catCard}>
+          </Animated.View>
+          <Animated.View style={[styles.catCard, catCardAnimatedStyle]}>
             <FontAwesome6 name="bowl-food" size={50} color="black" />
             <Text> Snacks </Text>
-          </View>
+          </Animated.View>
         </View>
       </View>
-     
     </View>
   );
 }
