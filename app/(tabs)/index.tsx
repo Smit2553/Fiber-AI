@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Image, StyleSheet, Platform, Text, View } from 'react-native';
+import { Image, StyleSheet, Platform, Text, View, TouchableHighlight, Pressable } from 'react-native';
 import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
@@ -47,16 +47,22 @@ export default function HomeScreen() {
         </Text>
         <View style={styles.catContainer}> 
           <Animated.View style={[styles.catCard, catCardAnimatedStyle]}>
-            <MaterialCommunityIcons name="food-apple-outline" size={50} color="black" />
-            <Text> Food </Text>
+            <Pressable onPress={() => console.log('Food')}>
+              <MaterialCommunityIcons name="food-apple-outline" size={50} color="black" />
+              <Text> Food </Text>
+            </Pressable>
           </Animated.View>
           <Animated.View style={[styles.catCard, catCardAnimatedStyle]}>
-            <Entypo name="drink" size={50} color="black" />
-            <Text> Drinks</Text>
+            <Pressable onPress={() => console.log('Drinks')}>
+              <Entypo name="drink" size={50} color="black" />
+              <Text> Drinks</Text>
+            </Pressable>
           </Animated.View>
           <Animated.View style={[styles.catCard, catCardAnimatedStyle]}>
-            <FontAwesome6 name="bowl-food" size={50} color="black" />
-            <Text> Snacks </Text>
+            <Pressable onPress={() => console.log('Snacks')}>
+              <FontAwesome6 name="bowl-food" size={50} color="black" />
+              <Text> Snacks </Text>
+            </Pressable>
           </Animated.View>
         </View>
       </View>
@@ -105,5 +111,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   }
-
 });
