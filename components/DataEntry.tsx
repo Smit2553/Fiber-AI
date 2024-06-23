@@ -2,15 +2,22 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { ThemedView } from './ThemedView';
 
-export function DataEntry() {
+interface DataEntryProps {
+    item: string;
+}
+
+const DataEntry: React.FC<DataEntryProps> = ({ item }) => {
     return (
-        <ThemedView style={styles.test}>
-        </ThemedView>
+        <View style={styles.container}>
+            <Text>{item}</Text>
+        </View>
     );
 }
 
 const styles = StyleSheet.create({
-    test: {
+    container: {
         
     },
 });
+
+export default DataEntry;
