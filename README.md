@@ -1,22 +1,32 @@
-# Welcome to your Expo app 👋
+# 🥑 Fiber - The AI powered app that rates your grocery products. (CalHacks 2024)
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+## Team name: LiveLaughToasterBath
 
-## Get started
+## Geting started
 
-1. Install dependencies
+This project was created with React Native, Expo, Python, Flask, and OpenAI's API.
 
-   ```bash
-   npm install
-   ```
+- [React Native](https://reactnative.dev/)
+- [Expo](https://expo.dev/)
+- [Expo Vectors Icons](https://icons.expo.fyi/Index)
+- [Flask](https://flask.palletsprojects.com/en/3.0.x/)
+- [Python](https://www.python.org/)
+- [OpenAI API](https://platform.openai.com/docs/overview)
 
-2. Start the app
+### Install dependencies/ Start the app (Make sure you have the environment set up)
 
-   ```bash
-    npx expo start
-   ```
+```
+(For frontend)
+npm install
+nupm run ios
 
-In the output, you'll find options to open the app in a
+(For backend)
+cd Backend
+pip3 install -r requirements.txt
+python3 app.py
+```
+
+### Simulator
 
 - [development build](https://docs.expo.dev/develop/development-builds/introduction/)
 - [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
@@ -24,27 +34,3 @@ In the output, you'll find options to open the app in a
 - [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
 
 You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
